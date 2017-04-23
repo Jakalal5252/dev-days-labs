@@ -8,7 +8,6 @@ using Xamarin.Forms;
 
 using DevDaysSpeakers.Model;
 using Plugin.TextToSpeech;
-
 using DevDaysSpeakers.ViewModel;
 
 namespace DevDaysSpeakers.View
@@ -26,9 +25,22 @@ namespace DevDaysSpeakers.View
             BindingContext = this.speaker;
             ButtonSpeak.Clicked += ButtonSpeak_Clicked;
             ButtonWebsite.Clicked += ButtonWebsite_Clicked;
-
-
+            ButtonAnalyze.Clicked += ButtonAnalyze_Clicked;
         }
+
+        private async void ButtonAnalyze_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                var level = await EmotionService.GetAverageHappinessScoreAsync(this.speaker.Avatar);
+                await DisplayAlert("Happiness Level", EmotionService.GetHappinessMessage(level), "OK");
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error!", ex.Message, "OK");
+            }
+        }
+
         private void ButtonWebsite_Clicked(object sender, EventArgs e)
         {
             if (speaker.Website.StartsWith("http"))

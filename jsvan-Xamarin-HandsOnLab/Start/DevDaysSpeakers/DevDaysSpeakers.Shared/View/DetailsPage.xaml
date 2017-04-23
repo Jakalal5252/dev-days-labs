@@ -12,6 +12,7 @@
       <Label Text="{Binding Description}"/>
       <Button Text="Speak" x:Name="ButtonSpeak"/>
       <Button Text="Go to Website" x:Name="ButtonWebsite"/>
+      <Button Text="Analyze" x:Name="ButtonAnalyze"/>
     </StackLayout>
   </ScrollView>
 </ContentPage>
