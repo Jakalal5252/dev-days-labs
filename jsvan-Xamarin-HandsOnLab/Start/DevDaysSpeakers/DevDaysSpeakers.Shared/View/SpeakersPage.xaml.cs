@@ -32,7 +32,8 @@ namespace DevDaysSpeakers.View
             if (speaker == null)
                 return;
 
-            await Navigation.PushAsync(new DetailsPage(speaker));
+            //Pass in view model now.
+            await Navigation.PushAsync(new DetailsPage(speaker, vm));
 
             ListViewSpeakers.SelectedItem = null;
         }

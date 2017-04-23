@@ -46,7 +46,12 @@ namespace DevDaysSpeakers.Services
             //Get our sync table that will call out to azure
             table = Client.GetSyncTable<Speaker>();
         }
-
+        public async Task UpdateSpeaker(Speaker speaker)
+        {
+            await Initialize();
+            await table.UpdateAsync(speaker);
+            await SyncSpeakers();
+        }
 
         public async Task<IEnumerable<Speaker>> GetSpeakers()
         {

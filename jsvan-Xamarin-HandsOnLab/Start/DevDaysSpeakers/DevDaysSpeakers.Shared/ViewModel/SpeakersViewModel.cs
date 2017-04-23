@@ -59,6 +59,14 @@ namespace DevDaysSpeakers.ViewModel
             if (error != null)
                 await Application.Current.MainPage.DisplayAlert("Error!", error.Message, "OK");
         }
+
+        public async Task UpdateSpeaker(Speaker speaker)
+        {
+            var service = DependencyService.Get<AzureService>();
+            await service.UpdateSpeaker(speaker);
+            await GetSpeakers();
+        }
+
         public bool IsBusy
         {
             get { return isBusy; }
